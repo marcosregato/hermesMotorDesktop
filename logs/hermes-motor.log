@@ -1,0 +1,95 @@
+2026-06-14 16:16:14,081 INFO org.springframework.boot.StartupInfoLogger [main] Starting Main using Java 21.0.11 with PID 47443 (/home/marcos/workspace/hermesMotorDesktop/target/classes started by marcos in /home/marcos/workspace/hermesMotorDesktop)
+2026-06-14 16:16:14,082 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v3.3.4, Spring v6.1.13
+2026-06-14 16:16:14,083 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2026-06-14 16:16:14,674 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-14 16:16:14,755 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 73 ms. Found 9 JPA repository interfaces.
+2026-06-14 16:16:15,234 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2026-06-14 16:16:15,449 INFO com.zaxxer.hikari.pool.HikariPool [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:7a39e6d5-3057-43ee-8a15-844e37ba78d5 user=SA
+2026-06-14 16:16:15,451 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2026-06-14 16:16:15,511 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-14 16:16:15,560 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-06-14 16:16:15,593 INFO org.hibernate.cache.internal.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2026-06-14 16:16:15,936 INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-14 16:16:17,186 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-14 16:16:17,255 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-14 16:16:17,521 INFO org.springframework.data.jpa.repository.query.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-14 16:16:18,169 INFO org.br.view.MainFrame [main] Inicializando Interface Gráfica Hermes Motor...
+2026-06-14 16:16:18,404 DEBUG org.br.view.MainFrame [main] Navegando para o painel: dashboard
+2026-06-14 16:16:18,557 INFO org.br.view.MainFrame [main] Sistema Hermes Motor iniciado com sucesso!
+2026-06-14 16:16:18,719 INFO org.springframework.boot.StartupInfoLogger [main] Started Main in 5.194 seconds (process running for 6.107)
+2026-06-14 16:16:26,623 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-14 16:16:26,637 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2026-06-14 16:16:26,639 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2026-06-14 16:23:27,190 INFO org.springframework.boot.StartupInfoLogger [main] Starting Main using Java 21.0.11 with PID 49066 (/home/marcos/workspace/hermesMotorDesktop/target/classes started by marcos in /home/marcos/workspace/hermesMotorDesktop)
+2026-06-14 16:23:27,192 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v3.3.4, Spring v6.1.13
+2026-06-14 16:23:27,193 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2026-06-14 16:23:27,731 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-14 16:23:27,815 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 77 ms. Found 9 JPA repository interfaces.
+2026-06-14 16:23:28,274 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2026-06-14 16:23:28,467 INFO com.zaxxer.hikari.pool.HikariPool [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:5e48fbff-81c8-4347-abcf-98ac28035ab8 user=SA
+2026-06-14 16:23:28,469 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2026-06-14 16:23:28,530 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-14 16:23:28,599 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-06-14 16:23:28,627 INFO org.hibernate.cache.internal.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2026-06-14 16:23:28,950 INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-14 16:23:30,013 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-14 16:23:30,074 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-14 16:23:30,389 INFO org.springframework.data.jpa.repository.query.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-14 16:23:31,654 INFO org.springframework.boot.StartupInfoLogger [main] Started Main in 4.984 seconds (process running for 5.806)
+2026-06-14 16:23:36,190 INFO org.br.service.OrdemServicoService [AWT-EventQueue-0] Buscando todas as Ordens de Serviço.
+2026-06-14 16:23:37,483 INFO org.br.controller.ClienteController [AWT-EventQueue-0] Controlador: Listando todos os clientes ativos.
+2026-06-14 16:23:38,645 INFO org.br.controller.VeiculoController [AWT-EventQueue-0] Controlador: Listando veículos ativos.
+2026-06-14 16:23:45,905 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-14 16:23:45,914 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2026-06-14 16:23:45,916 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2026-06-14 16:28:23,848 INFO org.springframework.boot.StartupInfoLogger [main] Starting Main using Java 21.0.11 with PID 50177 (/home/marcos/workspace/hermesMotorDesktop/target/classes started by marcos in /home/marcos/workspace/hermesMotorDesktop)
+2026-06-14 16:28:23,849 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v3.3.4, Spring v6.1.13
+2026-06-14 16:28:23,850 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2026-06-14 16:28:24,355 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-14 16:28:24,441 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 77 ms. Found 9 JPA repository interfaces.
+2026-06-14 16:28:24,887 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2026-06-14 16:28:25,087 INFO com.zaxxer.hikari.pool.HikariPool [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:e1254032-be00-4209-8cf1-a7b2caa99423 user=SA
+2026-06-14 16:28:25,089 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2026-06-14 16:28:25,146 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-14 16:28:25,205 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-06-14 16:28:25,237 INFO org.hibernate.cache.internal.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2026-06-14 16:28:25,552 INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-14 16:28:26,596 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-14 16:28:26,657 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-14 16:28:26,962 INFO org.springframework.data.jpa.repository.query.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-14 16:28:28,226 INFO org.springframework.boot.StartupInfoLogger [main] Started Main in 4.939 seconds (process running for 5.801)
+2026-06-14 16:28:34,148 INFO org.br.service.OrdemServicoService [AWT-EventQueue-0] Buscando todas as Ordens de Serviço.
+2026-06-14 16:28:35,337 INFO org.br.controller.VeiculoController [AWT-EventQueue-0] Controlador: Listando veículos ativos.
+2026-06-14 16:28:48,149 INFO org.br.controller.ClienteController [AWT-EventQueue-0] Controlador: Listando todos os clientes ativos.
+2026-06-14 16:28:53,016 INFO org.br.controller.ClienteController [AWT-EventQueue-0] Controlador: Listando todos os clientes ativos.
+2026-06-14 16:29:04,100 INFO org.br.controller.VeiculoController [AWT-EventQueue-0] Controlador: Listando veículos ativos.
+2026-06-14 16:29:05,469 INFO org.br.controller.ClienteController [AWT-EventQueue-0] Controlador: Listando todos os clientes ativos.
+2026-06-14 16:29:08,611 INFO org.br.controller.ClienteController [AWT-EventQueue-0] Controlador: Listando todos os clientes ativos.
+2026-06-14 16:29:11,081 INFO org.br.service.OrdemServicoService [AWT-EventQueue-0] Buscando todas as Ordens de Serviço.
+2026-06-14 16:29:12,375 INFO org.br.controller.VeiculoController [AWT-EventQueue-0] Controlador: Listando veículos ativos.
+2026-06-14 16:30:21,310 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-14 16:30:21,331 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2026-06-14 16:30:21,333 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2026-06-14 16:30:29,651 INFO org.springframework.boot.StartupInfoLogger [main] Starting Main using Java 21.0.11 with PID 50754 (/home/marcos/workspace/hermesMotorDesktop/target/classes started by marcos in /home/marcos/workspace/hermesMotorDesktop)
+2026-06-14 16:30:29,652 DEBUG org.springframework.boot.StartupInfoLogger [main] Running with Spring Boot v3.3.4, Spring v6.1.13
+2026-06-14 16:30:29,653 INFO org.springframework.boot.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2026-06-14 16:30:30,112 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-06-14 16:30:30,185 INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 67 ms. Found 9 JPA repository interfaces.
+2026-06-14 16:30:30,596 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Starting...
+2026-06-14 16:30:30,811 INFO com.zaxxer.hikari.pool.HikariPool [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:6ad0ccea-f6c5-4999-951d-c3f4482973a4 user=SA
+2026-06-14 16:30:30,813 INFO com.zaxxer.hikari.HikariDataSource [main] HikariPool-1 - Start completed.
+2026-06-14 16:30:30,861 INFO org.hibernate.jpa.internal.util.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-06-14 16:30:30,904 INFO org.hibernate.Version [main] HHH000412: Hibernate ORM core version 6.5.3.Final
+2026-06-14 16:30:30,932 INFO org.hibernate.cache.internal.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2026-06-14 16:30:31,210 INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-06-14 16:30:32,287 INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-06-14 16:30:32,353 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-06-14 16:30:32,672 INFO org.springframework.data.jpa.repository.query.QueryEnhancerFactory [main] Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-06-14 16:30:34,007 INFO org.springframework.boot.StartupInfoLogger [main] Started Main in 4.817 seconds (process running for 5.596)
+2026-06-14 16:30:35,809 INFO org.br.service.OrdemServicoService [AWT-EventQueue-0] Buscando todas as Ordens de Serviço.
+2026-06-14 16:30:38,367 INFO org.br.controller.VeiculoController [AWT-EventQueue-0] Controlador: Listando veículos ativos.
+2026-06-14 16:30:44,375 INFO org.br.service.OrdemServicoService [AWT-EventQueue-0] Buscando todas as Ordens de Serviço.
+2026-06-14 16:30:48,778 INFO org.br.controller.VeiculoController [AWT-EventQueue-0] Controlador: Listando veículos ativos.
+2026-06-14 16:31:12,505 INFO org.springframework.orm.jpa.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-06-14 16:31:12,514 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2026-06-14 16:31:12,517 INFO com.zaxxer.hikari.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
