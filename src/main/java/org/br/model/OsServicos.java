@@ -28,9 +28,12 @@ public class OsServicos {
     @JoinColumn(name = "id_servico", nullable = false)
     private ServicosCatalogo servico;
 
-    @Column(nullable = false)
+    @Builder.Default
     private Integer quantidade = 1;
 
-    @Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
+    @Column(name = "valor_unitario", precision = 10, scale = 2)
     private BigDecimal valorUnitario;
+
+    @Column(columnDefinition = "TEXT")
+    private String observacoes;
 }

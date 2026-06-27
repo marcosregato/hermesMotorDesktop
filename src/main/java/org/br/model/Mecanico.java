@@ -30,6 +30,6 @@ public class Mecanico {
     @Column(length = 50)
     private String especialidade;
 
-    @Column(nullable = false)
+    @Builder.Default
     private Boolean ativo = true;
 }

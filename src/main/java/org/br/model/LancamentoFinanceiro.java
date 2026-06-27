@@ -36,13 +36,23 @@ public class LancamentoFinanceiro {
 
     private LocalDate dataVencimento;
     
-    private LocalDateTime dataPagamento; // Data em que foi efetivamente pago/recebido
+    private LocalDateTime dataPagamento;
 
     @ManyToOne
     @JoinColumn(name = "id_os")
-    private OrdensServico ordemServico; // Vínculo opcional com uma O.S.
+    private OrdensServico ordemServico;
+
+    // --- Novos Campos Fiscais ---
+    @Enumerated(EnumType.STRING)
+    private StatusNotaFiscal statusNotaFiscal;
+
+    private String caminhoPdfNotaFiscal;
 
     public enum TipoLancamento {
         RECEITA, DESPESA
+    }
+
+    public enum StatusNotaFiscal {
+        NAO_EMITIDA, PROCESSANDO, EMITIDA, ERRO
     }
 }

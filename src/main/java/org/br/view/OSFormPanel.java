@@ -97,17 +97,23 @@ public class OSFormPanel extends JPanel implements Refreshable {
         cbMecanico.removeAllItems();
         mecanicoController.listarTodos().forEach(cbMecanico::addItem);
         
-        // Resetar campos
         txtKM.setText("");
         txtRelato.setText("");
         UIUtils.setErrorState(txtKM, false);
         UIUtils.setErrorState(txtRelato, false);
+        UIUtils.setErrorState(cbVeiculo, false);
     }
 
     private void salvar() {
         boolean hasError = false;
         
-        if (cbVeiculo.getSelectedItem() == null) { hasError = true; }
+        VeiculoDTO v = (VeiculoDTO) cbVeiculo.getSelectedItem();
+        if (v == null) {
+            UIUtils.setErrorState(cbVeiculo, true);
+            hasError = true;
+        } else {
+            UIUtils.setErrorState(cbVeiculo, false);
+        }
         
         String kmStr = txtKM.getText().trim();
         if (kmStr.isEmpty()) { 
@@ -124,10 +130,12 @@ public class OSFormPanel extends JPanel implements Refreshable {
             UIUtils.setErrorState(txtRelato, false);
         }
 
-        if (hasError) return;
+        if (hasError) {
+            JOptionPane.showMessageDialog(this, "Por favor, preencha todos os campos obrigatórios (*).", "Erro de Validação", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         try {
-            VeiculoDTO v = (VeiculoDTO) cbVeiculo.getSelectedItem();
             MecanicoDTO m = (MecanicoDTO) cbMecanico.getSelectedItem();
             
             OrdensServicoDTO dto = OrdensServicoDTO.builder()

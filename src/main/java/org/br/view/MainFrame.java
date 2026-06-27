@@ -1,10 +1,11 @@
 package org.br.view;
 
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.br.controller.*;
 import org.br.model.ConfigOficina;
+import org.br.model.Usuario;
+import org.br.service.AuthService;
 import org.br.utils.UIUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,7 +13,9 @@ import org.springframework.stereotype.Component;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -20,13 +23,29 @@ import java.util.Map;
 @Getter
 public class MainFrame extends JFrame {
 
+    // --- Injeção de Dependências ---
+    private final AuthService authService;
+    private final ClienteController clienteController;
+    private final MecanicoController mecanicoController;
+    private final VeiculoController veiculoController;
+    private final CatalogoController catalogoController;
+    private final OrdemServicoController osController;
+    private final DashboardController dashboardController;
+    private final ConfigOficinaController configController;
+    private final EstoqueController estoqueController;
+    private final FinanceiroController financeiroController;
+    private final AgendamentoController agendamentoController;
+    private final NotificacaoController notificacaoController;
+
+    // --- Componentes da UI ---
     private JPanel contentPanel;
     private CardLayout cardLayout;
     private JPanel sidebar;
     private JLabel lblLogo;
-    private Map<String, JButton> sidebarButtons = new HashMap<>();
-    private Map<String, Refreshable> refreshablePanels = new HashMap<>();
+    private final Map<String, JButton> sidebarButtons = new HashMap<>();
+    private final Map<String, Refreshable> refreshablePanels = new HashMap<>();
 
+    // --- Painéis da Aplicação ---
     private ClienteListPanel clienteListPanel;
     private ClienteFormPanel clienteFormPanel;
     private MecanicoListPanel mecanicoListPanel;
@@ -45,25 +64,16 @@ public class MainFrame extends JFrame {
     private AgendaPanel agendaPanel;
     private LembretesPanel lembretesPanel;
 
-    private final ClienteController clienteController;
-    private final MecanicoController mecanicoController;
-    private final VeiculoController veiculoController;
-    private final CatalogoController catalogoController;
-    private final OrdemServicoController osController;
-    private final DashboardController dashboardController;
-    private final ConfigOficinaController configController;
-    private final EstoqueController estoqueController;
-    private final FinanceiroController financeiroController;
-    private final AgendamentoController agendamentoController;
-    private final NotificacaoController notificacaoController;
-
     @Autowired
-    public MainFrame(ClienteController clienteController, MecanicoController mecanicoController, 
+    public MainFrame(AuthService authService, ClienteController clienteController, MecanicoController mecanicoController,
                      VeiculoController veiculoController, CatalogoController catalogoController,
                      OrdemServicoController osController, DashboardController dashboardController,
                      ConfigOficinaController configController, EstoqueController estoqueController,
                      FinanceiroController financeiroController, AgendamentoController agendamentoController,
                      NotificacaoController notificacaoController) {
+
+        // Atribuição das dependências
+        this.authService = authService;
         this.clienteController = clienteController;
         this.mecanicoController = mecanicoController;
         this.veiculoController = veiculoController;
@@ -76,24 +86,26 @@ public class MainFrame extends JFrame {
         this.agendamentoController = agendamentoController;
         this.notificacaoController = notificacaoController;
 
+        // Configuração da Janela Principal
         setTitle("Hermes Motor Sport");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1300, 850);
         setLocationRelativeTo(null);
-        
         setLayout(new BorderLayout());
-        
+
+        // Inicialização dos componentes da UI
         initSidebar();
-        
         cardLayout = new CardLayout();
         contentPanel = new JPanel(cardLayout);
         contentPanel.setBackground(UIUtils.COLOR_BACKGROUND);
-        
         initComponents();
-        
+
+        // Adiciona os painéis principais
         add(sidebar, BorderLayout.WEST);
         add(contentPanel, BorderLayout.CENTER);
-        
+
+        // Aplica as permissões e mostra a tela inicial
+        applyRolePermissions();
         showPanel("dashboard");
     }
 
@@ -101,7 +113,7 @@ public class MainFrame extends JFrame {
         sidebar = new JPanel();
         sidebar.setLayout(new BoxLayout(sidebar, BoxLayout.Y_AXIS));
         sidebar.setPreferredSize(new Dimension(240, 0));
-        sidebar.setBackground(UIUtils.COLOR_SIDEBAR); 
+        sidebar.setBackground(UIUtils.COLOR_SIDEBAR);
         sidebar.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(220, 220, 220)));
 
         lblLogo = new JLabel("HERMES MOTOR", JLabel.CENTER);
@@ -122,9 +134,8 @@ public class MainFrame extends JFrame {
         addSidebarButton("🔧  Mecânicos", "mecanicoList");
         addSidebarButton("📚  Catálogo", "catalogo");
         addSidebarButton("🔍  Histórico Técnico", "veiculoHistorico");
-        
+
         sidebar.add(Box.createVerticalGlue());
-        
         addSidebarButton("⚙️  Configurações", "configOficina");
         sidebar.add(Box.createVerticalStrut(30));
     }
@@ -141,16 +152,19 @@ public class MainFrame extends JFrame {
         btn.setAlignmentX(JComponent.CENTER_ALIGNMENT);
         btn.setMargin(new Insets(0, 15, 0, 0));
         btn.addActionListener(e -> showPanel(panelName));
-        
         sidebarButtons.put(panelName, btn);
         sidebar.add(btn);
         sidebar.add(Box.createVerticalStrut(5));
     }
 
     private void initComponents() {
+        // Instanciação dos painéis
         clienteListPanel = new ClienteListPanel(clienteController, this);
+        clienteFormPanel = new ClienteFormPanel(clienteController, this);
         mecanicoListPanel = new MecanicoListPanel(mecanicoController, this);
+        mecanicoFormPanel = new MecanicoFormPanel(mecanicoController, this);
         veiculoListPanel = new VeiculoListPanel(veiculoController, this);
+        veiculoFormPanel = new VeiculoFormPanel(veiculoController, clienteController, this);
         catalogoPanel = new CatalogoPanel(catalogoController);
         osListPanel = new OSListPanel(osController, this);
         osFormPanel = new OSFormPanel(osController, veiculoController, mecanicoController, this);
@@ -162,35 +176,57 @@ public class MainFrame extends JFrame {
         financeiroPanel = new FinanceiroPanel(financeiroController);
         agendaPanel = new AgendaPanel(agendamentoController, clienteController, this);
         lembretesPanel = new LembretesPanel(notificacaoController);
-        
+
+        // Adição dos painéis ao CardLayout
         contentPanel.add(dashboardPanel, "dashboard");
-        contentPanel.add(clienteListPanel, "clienteList");
-        contentPanel.add(mecanicoListPanel, "mecanicoList");
-        contentPanel.add(veiculoListPanel, "veiculoList");
-        contentPanel.add(catalogoPanel, "catalogo");
-        contentPanel.add(osListPanel, "osList");
-        contentPanel.add(osFormPanel, "osForm");
-        contentPanel.add(osDetalhePanel, "osDetalhe");
-        contentPanel.add(veiculoHistoricoPanel, "veiculoHistorico");
-        contentPanel.add(configOficinaPanel, "configOficina");
-        contentPanel.add(estoquePanel, "estoque");
-        contentPanel.add(financeiroPanel, "financeiro");
         contentPanel.add(agendaPanel, "agenda");
         contentPanel.add(lembretesPanel, "lembretes");
+        contentPanel.add(financeiroPanel, "financeiro");
+        contentPanel.add(osListPanel, "osList");
+        contentPanel.add(estoquePanel, "estoque");
+        contentPanel.add(clienteListPanel, "clienteList");
+        contentPanel.add(veiculoListPanel, "veiculoList");
+        contentPanel.add(mecanicoListPanel, "mecanicoList");
+        contentPanel.add(catalogoPanel, "catalogo");
+        contentPanel.add(veiculoHistoricoPanel, "veiculoHistorico");
+        contentPanel.add(configOficinaPanel, "configOficina");
+        contentPanel.add(clienteFormPanel, "clienteForm");
+        contentPanel.add(mecanicoFormPanel, "mecanicoForm");
+        contentPanel.add(veiculoFormPanel, "veiculoForm");
+        contentPanel.add(osFormPanel, "osForm");
+        contentPanel.add(osDetalhePanel, "osDetalhe");
 
+        // Registro dos painéis que podem ser atualizados
         refreshablePanels.put("dashboard", dashboardPanel);
-        refreshablePanels.put("clienteList", clienteListPanel);
-        refreshablePanels.put("mecanicoList", mecanicoListPanel);
-        refreshablePanels.put("veiculoList", veiculoListPanel);
-        refreshablePanels.put("catalogo", catalogoPanel);
-        refreshablePanels.put("osList", osListPanel);
-        refreshablePanels.put("osForm", osFormPanel);
-        refreshablePanels.put("veiculoHistorico", veiculoHistoricoPanel);
-        refreshablePanels.put("configOficina", configOficinaPanel);
-        refreshablePanels.put("estoque", estoquePanel);
-        refreshablePanels.put("financeiro", financeiroPanel);
         refreshablePanels.put("agenda", agendaPanel);
         refreshablePanels.put("lembretes", lembretesPanel);
+        refreshablePanels.put("financeiro", financeiroPanel);
+        refreshablePanels.put("osList", osListPanel);
+        refreshablePanels.put("estoque", estoquePanel);
+        refreshablePanels.put("clienteList", clienteListPanel);
+        refreshablePanels.put("veiculoList", veiculoListPanel);
+        refreshablePanels.put("mecanicoList", mecanicoListPanel);
+        refreshablePanels.put("catalogo", catalogoPanel);
+        refreshablePanels.put("veiculoHistorico", veiculoHistoricoPanel);
+        refreshablePanels.put("configOficina", configOficinaPanel);
+        refreshablePanels.put("clienteForm", clienteFormPanel);
+        refreshablePanels.put("mecanicoForm", mecanicoFormPanel);
+        refreshablePanels.put("veiculoForm", veiculoFormPanel);
+        refreshablePanels.put("osForm", osFormPanel);
+        refreshablePanels.put("osDetalhe", osDetalhePanel);
+    }
+
+    private void applyRolePermissions() {
+        Usuario usuarioLogado = authService.getUsuarioLogado();
+        if (usuarioLogado != null && usuarioLogado.getRole() == Usuario.Role.MECANICO) {
+            log.info("Aplicando permissões para o perfil MECANICO.");
+            List<String> menusBloqueados = Arrays.asList("financeiro", "estoque", "configOficina", "lembretes", "agenda");
+            sidebarButtons.forEach((nome, botao) -> {
+                if (menusBloqueados.contains(nome)) {
+                    botao.setVisible(false);
+                }
+            });
+        }
     }
 
     public void updateLogo() {
@@ -223,7 +259,9 @@ public class MainFrame extends JFrame {
         });
 
         Refreshable panel = refreshablePanels.get(name);
-        if (panel != null) panel.refresh();
+        if (panel != null) {
+            panel.refresh();
+        }
         cardLayout.show(contentPanel, name);
     }
 }

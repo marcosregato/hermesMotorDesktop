@@ -19,7 +19,8 @@ public class UIUtils {
     public static final Color COLOR_BACKGROUND = new Color(250, 250, 251); // Off-White
     public static final Color COLOR_SIDEBAR = new Color(245, 245, 247);
     
-    private static final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
+    private static final Locale BRAZIL = new Locale("pt", "BR");
+    private static final NumberFormat CURRENCY_FORMAT = NumberFormat.getCurrencyInstance(BRAZIL);
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public static void formatTable(JTable table) {
@@ -45,9 +46,6 @@ public class UIUtils {
         component.repaint();
     }
 
-    /**
-     * Cria um painel estilo "Card" branco com bordas arredondadas e sombra sutil.
-     */
     public static JPanel createCardPanel() {
         JPanel card = new JPanel(new BorderLayout());
         card.setBackground(Color.WHITE);

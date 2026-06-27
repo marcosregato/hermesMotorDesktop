@@ -12,12 +12,26 @@ import lombok.*;
 @Builder
 public class ConfigOficina {
     @Id
-    private Long id; // Geralmente fixo como 1
+    private Long id; // Fixo como 1
+
     private String nomeOficina;
     private String cnpj;
     private String telefone;
     private String endereco;
+    private String logoPath;
+
     @Column(columnDefinition = "TEXT")
     private String mensagemPadraoWhatsapp;
-    private String logoPath; // Novo campo para o caminho do logo
+
+    // --- Novos Campos Fiscais ---
+    private String tokenApiFiscal;
+
+    @Enumerated(EnumType.STRING)
+    private AmbienteFiscal ambienteFiscal;
+
+    private String cfopPadrao;
+
+    public enum AmbienteFiscal {
+        HOMOLOGACAO, PRODUCAO
+    }
 }

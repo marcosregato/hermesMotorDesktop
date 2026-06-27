@@ -19,4 +19,6 @@ public class LancamentoFinanceiroDTO {
     private LocalDate dataVencimento;
     private LocalDateTime dataPagamento;
     private String status;
+    // private LancamentoFinanceiro.StatusNotaFiscal statusNotaFiscal;
+    // private String caminhoPdfNotaFiscal;
 }

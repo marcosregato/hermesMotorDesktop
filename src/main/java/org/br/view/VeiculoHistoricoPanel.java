@@ -7,87 +7,87 @@ import org.br.utils.UIUtils;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.List;
+import java.awt.event.ActionEvent;
 
 public class VeiculoHistoricoPanel extends JPanel implements Refreshable {
 
     private final VeiculoController veiculoController;
     private final MainFrame mainFrame;
-
-    private JTextField txtPlacaBusca;
-    private JTable tblHistorico;
-    private DefaultTableModel modelHistorico;
-    private JLabel lblMotoInfo;
+    private JTextField txtPlaca;
+    private JTable table;
+    private DefaultTableModel model;
 
     public VeiculoHistoricoPanel(VeiculoController veiculoController, MainFrame mainFrame) {
         this.veiculoController = veiculoController;
         this.mainFrame = mainFrame;
-
         setLayout(new BorderLayout(15, 15));
         setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+        setBackground(UIUtils.COLOR_BACKGROUND);
         initComponents();
     }
 
     private void initComponents() {
-        JPanel topPanel = new JPanel(new BorderLayout(10, 10));
-        JLabel lblTitulo = new JLabel("Histórico de Manutenções por Placa");
-        lblTitulo.setFont(new Font("sans-serif", Font.BOLD, 22));
-        topPanel.add(lblTitulo, BorderLayout.NORTH);
+        // Header
+        JPanel headerPanel = new JPanel(new BorderLayout(10, 10));
+        headerPanel.setOpaque(false);
+        JLabel lblTitulo = new JLabel("Histórico Técnico do Veículo");
+        lblTitulo.setFont(new Font("sans-serif", Font.BOLD, 24));
+        headerPanel.add(lblTitulo, BorderLayout.NORTH);
 
-        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        txtPlacaBusca = new JTextField(15);
-        txtPlacaBusca.putClientProperty("JTextField.placeholderText", "Digite a placa (ex: ABC1234)");
-        txtPlacaBusca.setPreferredSize(new Dimension(200, 35));
+        JPanel searchPanel = new JPanel(new BorderLayout(10, 0));
+        searchPanel.setOpaque(false);
+        txtPlaca = new JTextField();
+        txtPlaca.putClientProperty("JTextField.placeholderText", "Digite a placa do veículo...");
+        txtPlaca.setPreferredSize(new Dimension(0, 35));
         
-        JButton btnBuscar = new JButton("Buscar Histórico");
+        JButton btnBuscar = new JButton("Buscar");
         UIUtils.setRoundButton(btnBuscar, UIUtils.COLOR_PRIMARY);
-        btnBuscar.addActionListener(e -> buscar());
+        btnBuscar.addActionListener(this::buscarHistorico);
 
-        searchPanel.add(txtPlacaBusca);
-        searchPanel.add(btnBuscar);
-        topPanel.add(searchPanel, BorderLayout.SOUTH);
-        add(topPanel, BorderLayout.NORTH);
+        searchPanel.add(txtPlaca, BorderLayout.CENTER);
+        searchPanel.add(btnBuscar, BorderLayout.EAST);
+        headerPanel.add(searchPanel, BorderLayout.CENTER);
+        add(headerPanel, BorderLayout.NORTH);
 
-        JPanel centerPanel = new JPanel(new BorderLayout(10, 10));
-        lblMotoInfo = new JLabel("Moto não selecionada");
-        lblMotoInfo.setForeground(Color.GRAY);
-        centerPanel.add(lblMotoInfo, BorderLayout.NORTH);
-
-        modelHistorico = new DefaultTableModel(new String[]{"O.S. #", "Data", "Status", "Total", "Relato do Cliente"}, 0) {
+        // Tabela
+        JPanel card = UIUtils.createCardPanel();
+        model = new DefaultTableModel(new String[]{"ID O.S.", "Data Abertura", "Status", "Valor Total", "Relato Cliente"}, 0) {
             @Override public boolean isCellEditable(int row, int column) { return false; }
         };
-        tblHistorico = new JTable(modelHistorico);
-        UIUtils.formatTable(tblHistorico);
-        centerPanel.add(new JScrollPane(tblHistorico), BorderLayout.CENTER);
-        add(centerPanel, BorderLayout.CENTER);
+        table = new JTable(model);
+        UIUtils.formatTable(table);
+        table.getColumnModel().getColumn(1).setCellRenderer(UIUtils.getDateRenderer());
+        table.getColumnModel().getColumn(3).setCellRenderer(UIUtils.getCurrencyRenderer());
+        card.add(new JScrollPane(table), BorderLayout.CENTER);
+        add(card, BorderLayout.CENTER);
     }
 
-    private void buscar() {
-        String placa = txtPlacaBusca.getText().trim().toUpperCase();
-        if (placa.isEmpty()) return;
-        try {
-            List<OrdensServicoDTO> historico = veiculoController.buscarHistorico(placa);
-            modelHistorico.setRowCount(0);
-            if (historico.isEmpty()) {
-                lblMotoInfo.setText("Nenhum histórico encontrado para a placa: " + placa);
-            } else {
-                lblMotoInfo.setText("Exibindo histórico para a placa: " + placa);
-                for (OrdensServicoDTO os : historico) {
-                    modelHistorico.addRow(new Object[]{os.getId(), os.getDataAbertura(), os.getStatus(), "R$ " + os.getValorGeralTotal(), os.getRelatoCliente()});
-                }
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Veículo não encontrado.");
-            lblMotoInfo.setText("Moto não encontrada.");
-            modelHistorico.setRowCount(0);
+    private void buscarHistorico(ActionEvent e) {
+        String placa = txtPlaca.getText().trim();
+        if (placa.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, digite uma placa.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        model.setRowCount(0);
+        java.util.List<OrdensServicoDTO> historico = veiculoController.buscarHistorico(placa);
+        
+        if (historico.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Nenhum histórico encontrado para a placa: " + placa, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            historico.forEach(os -> model.addRow(new Object[]{
+                os.getId(),
+                os.getDataAbertura(),
+                os.getStatus(),
+                os.getValorGeralTotal(),
+                os.getRelatoCliente()
+            }));
         }
     }
 
     @Override
     public void refresh() {
-        // Limpar busca anterior ao voltar para a tela
-        txtPlacaBusca.setText("");
-        modelHistorico.setRowCount(0);
-        lblMotoInfo.setText("Moto não selecionada");
+        txtPlaca.setText("");
+        model.setRowCount(0);
     }
 }
